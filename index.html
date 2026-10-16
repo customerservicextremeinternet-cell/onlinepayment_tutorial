@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Tutorials | Installation Guide</title>
+    
+    <!-- Google Fonts: Manrope & Poppins Bold -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-pure-black: #000000;
+            --bg-charcoal: #0a0a0a;
+            --card-bg: rgba(18, 18, 18, 0.85);
+            --accent-red: #8b0000;
+            --accent-crimson: #dc143c;
+            --accent-glow: rgba(220, 20, 60, 0.35);
+            --text-white: #ffffff;
+            --text-muted: #a3a3a3;
+            --border-red: rgba(220, 20, 60, 0.4);
+            --transition-speed: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-pure-black);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 1.5rem;
+        }
+
+        /* Background Animated Glow */
+        .bg-glow-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            max-width: 700px;
+            max-height: 700px;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
+            z-index: -1;
+            animation: pulseGlow 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        /* Page Entrance Animation */
+        .fade-in {
+            animation: fadeInPage 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Phone Display Frame (1080x1920px aspect ratio scaled for viewport) */
+        .phone-frame {
+            position: relative;
+            width: 100%;
+            max-width: 430px; /* Scaled mobile width profile */
+            height: 85vh;
+            max-height: 880px;
+            background-color: var(--bg-charcoal);
+            border: 4px solid #222;
+            border-radius: 40px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(139, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 2rem 1.25rem;
+            justify-content: space-between;
+        }
+
+        /* Phone Speaker Notch Indicator */
+        .phone-notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 18px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            z-index: 5;
+        }
+
+        /* Back Button Style */
+        .back-btn {
+            background: transparent;
+            color: var(--text-white);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-red);
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);
+            transition: var(--transition-speed);
+            text-decoration: none;
+            align-self: flex-start;
+            margin-top: 0.5rem;
+            z-index: 10;
+        }
+
+        .back-btn:hover {
+            background-color: var(--accent-red);
+            border-color: var(--accent-crimson);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .back-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Main Tutorial Section Inside Frame */
+        .tutorial-container {
+            text-align: center;
+            width: 100%;
+            margin: auto 0;
+            padding: 1rem 0;
+        }
+
+        .main-heading {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 5vw, 2.1rem);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .heading-underline {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-crimson), transparent);
+            margin: 0 auto 0.75rem auto;
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        /* Buttons Layout inside phone frame (Side by Side) */
+        .buttons-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        /* Device Selection Buttons */
+        .device-btn {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-red);
+            border-radius: 16px;
+            padding: 1.25rem 0.75rem;
+            flex: 1;
+            min-height: 155px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 12px rgba(139, 0, 0, 0.15);
+            transition: var(--transition-speed);
+            backdrop-filter: blur(10px);
+        }
+
+        .device-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--accent-crimson);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--accent-glow);
+            background-color: rgba(25, 12, 12, 0.9);
+        }
+
+        .device-btn:active {
+            transform: scale(0.97);
+        }
+
+        .logo-container {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .device-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+            transition: transform var(--transition-speed);
+        }
+
+        .device-btn:hover .device-logo {
+            transform: scale(1.08);
+        }
+
+        .device-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+            color: var(--text-white);
+            text-align: center;
+        }
+
+        /* Video Player Modal / Section */
+        .video-modal {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 1rem;
+            border-radius: 36px;
+        }
+
+        .video-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .video-player-container {
+            background-color: var(--bg-charcoal);
+            border: 2px solid var(--border-red);
+            border-radius: 16px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 25px var(--accent-glow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .video-modal.active .video-player-container {
+            transform: scale(1);
+        }
+
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .video-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            color: var(--text-white);
+        }
+
+        .close-player-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition-speed);
+        }
+
+        .close-player-btn:hover {
+            background-color: rgba(220, 20, 60, 0.2);
+            color: var(--text-white);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: var(--bg-pure-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            outline: none;
+        }
+
+        /* Error Message State */
+        .video-error-msg {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(10, 10, 10, 0.95);
+            color: var(--text-muted);
+            padding: 1.5rem;
+            text-align: center;
+            gap: 0.75rem;
+        }
+
+        .video-error-msg.visible {
+            display: flex;
+        }
+
+        .video-error-msg p {
+            font-size: 0.9rem;
+            color: #ff6b6b;
+        }
+
+        /* Accessibility focus states */
+        button:focus-visible, 
+        a:focus-visible {
+            outline: 3px solid var(--accent-crimson);
+            outline-offset: 3px;
+        }
+
+        /* Full responsive adjustment for small mobile viewports */
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            .phone-frame {
+                height: 100vh;
+                max-height: none;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .phone-notch {
+                display: none;
+            }
+            .video-modal {
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body class="fade-in">
+
+    <!-- Ambient Red Background Glow -->
+    <div class="bg-glow-effect" aria-hidden="true"></div>
+
+    <!-- Phone Frame Container (1080x1920px aspect ratio preview) -->
+    <div class="phone-frame">
+        <!-- Phone Camera/Speaker Notch -->
+        <div class="phone-notch" aria-hidden="true"></div>
+
+        <!-- Back Button -->
+        <button id="backButton" class="back-btn" aria-label="Go back to previous page or close tutorial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            BACK
+        </button>
+
+        <!-- Main Tutorial Section -->
+        <main class="tutorial-container">
+            <!-- CUSTOMIZE: Main Heading and Subtitle -->
+            <h1 class="main-heading">Video Tutorials</h1>
+            <div class="heading-underline" aria-hidden="true"></div>
+            <p class="subtitle">Choose your device to watch the step-by-step installation guide.</p>
+
+            <!-- Device Selection Buttons (Horizontally Side by Side) -->
+            <div class="buttons-wrapper">
+                <!-- Android Tutorial Trigger Button -->
+                <button class="device-btn" id="androidBtn" aria-label="Open Android installation video tutorial">
+                    <div class="logo-container">
+                        <!-- Ensure Android.png is in the same directory -->
+                        <img src="./Android.png" alt="Android Logo" class="device-logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 24 24\' fill=\'%23dc143c\'><path d=\'M17.523 15.341c-.551 0-.998-.447-.998-.999s.447-.998.998-.998.998.446.998.998-.447.999-.998.999m-11.046 0c-.551 0-.998-.447-.998-.999s.447-.998.998-.998.998.446.998.998-.447.999-.998.999m11.536-5.875l1.832-3.174a.499.499 0 10-.866-.5l-1.859 3.221C15.938 8.351 14.04 7.99 12 7.99s-3.938.361-5.626 1.073L4.515 5.842a.499.499 0 10-.866.5l1.832 3.174C3.896 11.238 2.5 13.435 2.5 16h19c0-2.565-1.396-4.762-3.487-6.534\'/></svg>'">
+                    </div>
+                    <span class="device-label">ANDROID TUTORIAL</span>
+                </button>
+
+                <!-- Apple / iOS Tutorial Trigger Button -->
+                <button class="device-btn" id="iosBtn" aria-label="Open iOS installation video tutorial">
+                    <div class="logo-container">
+                        <!-- Ensure IOS.png is in the same directory -->
+                        <img src="./IOS.png" alt="Apple iOS Logo" class="device-logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 24 24\' fill=\'%23ffffff\'><path d=\'M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.83 5.48c.57-.69 1.01-1.65.9-2.61-.89.04-1.98.6-2.61 1.29-.54.58-1.03 1.55-.91 2.48 1-.08 2.05-.53 2.62-1.16z\'/></svg>'">
+                    </div>
+                    <span class="device-label">iOS TUTORIAL</span>
+                </button>
+            </div>
+        </main>
+
+        <!-- Interactive Video Player Modal Section Inside Frame -->
+        <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" aria-labelledby="videoTitle">
+            <div class="video-player-container">
+                <!-- Modal Header -->
+                <div class="video-header">
+                    <h2 id="videoTitle" class="video-title">Tutorial Video</h2>
+                    <button id="closeModalBtn" class="close-player-btn" aria-label="Close video player">&times;</button>
+                </div>
+                <!-- Video Container -->
+                <div class="video-wrapper">
+                    <video id="tutorialVideo" controls preload="metadata">
+                        <!-- Video source paths loaded dynamically via JavaScript -->
+                        Your browser does not support the video tag.
+                    </video>
+                    <!-- Error State Fallback Message -->
+                    <div id="videoErrorMsg" class="video-error-msg">
+                        <p>Unable to load the tutorial video file.</p>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Please verify that the video file exists in the correct directory.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Controller -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const androidBtn = document.getElementById('androidBtn');
+            const iosBtn = document.getElementById('iosBtn');
+            const videoModal = document.getElementById('videoModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const tutorialVideo = document.getElementById('tutorialVideo');
+            const videoTitle = document.getElementById('videoTitle');
+            const videoErrorMsg = document.getElementById('videoErrorMsg');
+            const backButton = document.getElementById('backButton');
+
+            // Video Source Configuration
+            const videoSources = {
+                android: {
+                    src: './android.mp4',
+                    title: 'Android Online Payment Tutorial'
+                },
+                ios: {
+                    src: './IOS.mp4',
+                    title: 'iOS Online Payment Tutorial'
+                }
+            };
+
+            // Open Video Modal Function
+            function openVideoPlayer(platform) {
+                const config = videoSources[platform];
+                if (!config) return;
+
+                videoErrorMsg.classList.remove('visible');
+                videoTitle.textContent = config.title;
+                tutorialVideo.src = config.src;
+                videoModal.classList.add('active');
+
+                tutorialVideo.load();
+                tutorialVideo.play().catch(err => {
+                    console.warn("Autoplay prevented or video load error:", err);
+                });
+            }
+
+            // Close Video Modal Function
+            function closeVideoPlayer() {
+                tutorialVideo.pause();
+                tutorialVideo.currentTime = 0;
+                tutorialVideo.src = '';
+                videoModal.classList.remove('active');
+                videoErrorMsg.classList.remove('visible');
+            }
+
+            // Event Listeners for Device Buttons
+            androidBtn.addEventListener('click', () => openVideoPlayer('android'));
+            iosBtn.addEventListener('click', () => openVideoPlayer('ios'));
+
+            // Event Listeners for Closing Player
+            closeModalBtn.addEventListener('click', closeVideoPlayer);
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    closeVideoPlayer();
+                }
+            });
+
+            // Handle Video Loading Errors Gracefully
+            tutorialVideo.addEventListener('error', () => {
+                videoErrorMsg.classList.add('visible');
+            });
+
+            // Keyboard Accessibility: Close modal on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                    closeVideoPlayer();
+                }
+            });
+
+            // Back Button Functionality (Scenario A: history.back())
+            backButton.addEventListener('click', () => {
+                if (videoModal.classList.contains('active')) {
+                    closeVideoPlayer();
+                } else {
+                    history.back();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
